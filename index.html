@@ -49,7 +49,7 @@ nav{position:fixed;bottom:0;left:0;right:0;background:#ffffffed;backdrop-filter:
  </div>
  <div class="card">
   <div class="section-title">AIスケジュール作成</div>
-  <p class="small" style="line-height:1.7">やりたいこと・固定予定・所要時間を入力すると、無理のない予定案を作るためのプロンプトを用意するよ。AIによる生成にはChatGPTへの貼り付けが必要です。</p>
+  <p class="small" style="line-height:1.7">やりたいこと・固定予定・所要時間を入力すると、無理のない予定案を作るためのプロンプトを用意するよ。登録済みの今日のタスク・習慣も依頼文に自動で含めます。ChatGPTが開いたら、コピーされた文章を入力欄に貼り付けて送信してね。</p>
   <div class="field"><label>今日やりたいこと・所要時間</label><textarea id="aiTasks" placeholder="例：勉強1時間、面接練習30分、洗濯45分"></textarea></div>
   <div class="field"><label>動かせない予定</label><textarea id="aiFixed" placeholder="例：11:30病院、17:00友達と飲み"></textarea></div>
   <div class="formrow"><div class="field"><label>開始できる時間</label><input type="time" id="aiStart" value="09:00"></div><div class="field"><label>終了したい時間</label><input type="time" id="aiEnd" value="22:00"></div></div>
@@ -125,8 +125,86 @@ function loadJournal(){const j=state.journal[today()]||{};$('journalGood').value
 $('saveJournal').onclick=()=>{state.journal[today()]={good:$('journalGood').value,learn:$('journalLearn').value,tomorrow:$('journalTomorrow').value};save();toast('日記を保存したよ')};
 document.querySelectorAll('[data-tab]').forEach(b=>b.onclick=()=>switchTab(b.dataset.tab));
 function switchTab(tab){document.querySelectorAll('.section').forEach(s=>s.classList.toggle('active',s.id===tab));document.querySelectorAll('[data-tab]').forEach(b=>b.classList.toggle('active',b.dataset.tab===tab));window.scrollTo({top:0,behavior:'smooth'})}
-$('makeAI').onclick=async()=>{let prompt=`あなたは生活設計が得意なスケジュールアシスタントです。以下の条件で、休憩・移動・準備時間を考慮した現実的な1日の予定を作成してください。未確定事項は質問してください。\n日付：${today()}\n開始可能：${$('aiStart').value}\n終了希望：${$('aiEnd').value}\nやりたいこと・所要時間：${$('aiTasks').value}\n固定予定：${$('aiFixed').value}\n完了済みの予定は動かさず、優先順位をつけて時刻順の表とチェックリストで回答してください。`;
- try{await navigator.clipboard.writeText(prompt);toast('依頼文をコピーしたよ。ChatGPTに貼り付けてね')}catch{toast('依頼文をコピーできなかったよ')}
+function buildAIPrompt(){
+ const date=today();
+ const registered=tasksFor(date);
+ const openTasks=registered.filter(t=>!t.done);
+ const doneTasks=registered.filter(t=>t.done);
+ const taskLine=t=>`- ${t.time||'時刻未設定'}｜${t.name}（${t.category||'その他'}）`;
+ const habits=state.habits||[];
+ const habitLines=habits.map(h=>`- ${h.name}（今日${(h.done||{})[date]?'完了':'未完了'}）`);
+ return `あなたは生活設計が得意なスケジュールアシスタントです。以下の情報をもとに、休憩・移動・準備・食事の時間も考慮した、無理のない1日の予定を作成してください。不足情報があれば、予定を作る前に必要なことだけ質問してください。
+
+【日付】
+${date}
+
+【使える時間】
+開始可能：${$('aiStart').value}
+終了希望：${$('aiEnd').value}
+
+【アプリに登録済みの今日のタスク・予定（未完了）】
+${openTasks.length?openTasks.map(taskLine).join('\\n'):'（未登録）'}
+
+【アプリで完了済みのタスク】
+${doneTasks.length?doneTasks.map(taskLine).join('\\n'):'（なし）'}
+※完了済みのものは再度予定に入れないでください。
+
+【今日の習慣】
+${habitLines.length?habitLines.join('\\n'):'（登録なし）'}
+
+【追加でやりたいこと・所要時間】
+${$('aiTasks').value.trim()||'（追加なし）'}
+
+【動かせない予定】
+${$('aiFixed').value.trim()||'（追加なし）'}
+
+【作成ルール】
+- 登録済みタスクの時刻は、指定がある場合は基本的に尊重してください。
+- 同じ内容のタスクが重複していたら統合してください。
+- 優先順位を考え、詰め込みすぎず余白を確保してください。
+- 時刻順の表と、最後にチェックリストを作ってください。
+- 予定が時間内に収まらない場合は、無理に詰め込まず翌日以降に回す候補を示してください。`;
+}
+
+$('makeAI').onclick=async()=>{
+ const prompt=buildAIPrompt();
+ let copied=false;
+ try{
+  if(navigator.clipboard && window.isSecureContext){
+   await navigator.clipboard.writeText(prompt);
+   copied=true;
+  }
+ }catch(e){}
+ if(!copied){
+  const area=document.createElement('textarea');
+  area.value=prompt;
+  area.setAttribute('readonly','');
+  area.style.position='fixed';
+  area.style.opacity='0';
+  document.body.appendChild(area);
+  area.select();
+  try{copied=document.execCommand('copy')}catch(e){}
+  area.remove();
+ }
+ if(copied){
+  toast('依頼文をコピーしたよ。ChatGPTで貼り付けてね');
+ }else{
+  const area=document.createElement('textarea');
+  area.value=prompt;
+  area.style.position='fixed';
+  area.style.left='12px';
+  area.style.bottom='90px';
+  area.style.width='calc(100% - 24px)';
+  area.style.height='180px';
+  area.style.zIndex='20';
+  area.style.background='#fff';
+  area.style.border='2px solid #557b65';
+  area.id='aiPromptFallback';
+  document.body.appendChild(area);
+  area.focus();
+  area.select();
+  toast('コピーできない場合は表示文を長押ししてコピーしてね');
+ }
  window.open('https://chatgpt.com/','_blank');
 };
 $('notifyBtn').onclick=async()=>{if(!('Notification'in window))return toast('このブラウザは通知に対応していません');let p=await Notification.requestPermission();$('notifyStatus').textContent=p==='granted'?'通知が許可されました。このページを開いている間、予定時刻に通知します。':'通知は許可されていません。';toast(p==='granted'?'通知を許可しました':'通知は未許可です')};
