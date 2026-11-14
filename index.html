@@ -9,211 +9,248 @@
 <meta name="apple-mobile-web-app-title" content="Daily+">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="icon-192.png">
-<title>Daily+ | 毎日を整える</title>
+<title>Daily+ 2.0</title>
 <style>
-:root{--bg:#f6f4ef;--card:#fff;--ink:#242720;--muted:#85877e;--line:#e9e7df;--green:#557b65;--green2:#e8f0e9;--amber:#b47b3d;--shadow:0 8px 28px #292b2410}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;padding-bottom:calc(82px + env(safe-area-inset-bottom))}
-header{padding:calc(18px + env(safe-area-inset-top)) 20px 12px;display:flex;justify-content:space-between;align-items:center;max-width:760px;margin:auto}
-.brand{font-weight:800;font-size:25px;letter-spacing:-1px}.brand span{color:var(--green)}.sub{font-size:10px;color:var(--muted);letter-spacing:1.5px;margin-top:2px}
-main{max-width:760px;margin:auto;padding:8px 16px 24px}.hero{background:#e9eee7;border-radius:24px;padding:21px;margin:4px 0 17px}.eyebrow{font-size:11px;color:#66776a;letter-spacing:1px}.hero h1{font-size:23px;margin:8px 0 5px}.hero p{font-size:12px;color:#6e786f;margin:0}.stats{display:flex;align-items:center;justify-content:space-between;margin-top:20px}.percent{font-size:31px;font-weight:800}.small{font-size:11px;color:var(--muted)}.track{height:7px;background:#d7dfd6;border-radius:20px;margin-top:8px;overflow:hidden}.fill{height:100%;background:var(--green);width:0%;transition:.2s}
-.tabs{display:flex;gap:6px;overflow:auto;padding:3px 0 13px;scrollbar-width:none}.tab{border:0;background:transparent;color:var(--muted);padding:10px 13px;border-radius:13px;font-size:12px;white-space:nowrap}.tab.active{background:#fff;color:var(--green);font-weight:700;box-shadow:var(--shadow)}
-.section{display:none}.section.active{display:block}.row{display:flex;align-items:center;justify-content:space-between;gap:10px}.section-title{font-size:16px;font-weight:750;margin:7px 0 12px}.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:15px;margin-bottom:12px;box-shadow:var(--shadow)}.muted{color:var(--muted)}.task{display:flex;gap:11px;align-items:center;padding:12px 0;border-bottom:1px solid #f0efe9}.task:last-child{border:0}.task input[type=checkbox],.habit input{width:19px;height:19px;accent-color:var(--green);flex-shrink:0}.task-main{flex:1;min-width:0}.task-time{font-size:11px;color:var(--muted)}.task-name{font-size:14px;margin-top:3px;overflow-wrap:anywhere}.done .task-name{text-decoration:line-through;color:#a4a69e}.tag{font-size:10px;padding:5px 8px;border-radius:20px;background:#f1f2ed;color:#697469;white-space:nowrap}
-button,.btn{border:0;border-radius:13px;padding:12px 14px;background:var(--green);color:white;font-size:13px;font-weight:700;cursor:pointer}.btn.secondary,button.secondary{background:#edf1eb;color:var(--green)}button.ghost{background:transparent;color:var(--muted);padding:8px}.btn.full{width:100%}
-input,textarea,select{width:100%;border:1px solid var(--line);border-radius:12px;padding:12px;background:#fff;color:var(--ink);font:inherit;font-size:14px;min-width:0}textarea{min-height:115px;resize:vertical}.field{margin:10px 0}.field label{display:block;font-size:11px;color:var(--muted);margin:0 0 6px}.formrow{display:flex;gap:8px}.formrow>*{flex:1}
-.task-add{display:grid;grid-template-columns:1fr 100px;gap:8px}.task-add button{grid-column:1/-1}
-.calendar-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}.calgrid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;text-align:center}.calday{padding:10px 2px;border-radius:11px;font-size:12px;background:transparent;border:0;color:var(--ink)}.calday.muted{color:#c2c2bb}.calday.selected{background:var(--green);color:white}.calday.today:not(.selected){outline:1px solid var(--green)}.calname{font-size:10px;color:var(--muted);padding:5px}
-.habit{display:flex;align-items:center;gap:10px;padding:12px 0;border-bottom:1px solid #f0efe9;font-size:14px}.habit:last-child{border:0}.habit label{flex:1}
-.empty{text-align:center;color:var(--muted);font-size:12px;padding:18px}.foot{text-align:center;color:#a0a197;font-size:10px;padding:15px}
-#toast{position:fixed;bottom:95px;left:50%;transform:translateX(-50%);background:#272c27;color:#fff;border-radius:30px;padding:10px 16px;font-size:12px;opacity:0;pointer-events:none;transition:.2s;z-index:10}#toast.show{opacity:1}
-nav{position:fixed;bottom:0;left:0;right:0;background:#ffffffed;backdrop-filter:blur(14px);border-top:1px solid var(--line);padding:9px 8px calc(9px + env(safe-area-inset-bottom));display:flex;justify-content:center;gap:4px;z-index:5}nav button{background:transparent;color:var(--muted);padding:8px 12px;min-width:64px;font-size:10px;font-weight:500}nav button.active{background:var(--green2);color:var(--green);font-weight:800}nav .ico{display:block;font-size:18px;margin-bottom:3px}
-@media(min-width:600px){main{padding-left:24px;padding-right:24px}.hero{padding:26px}.task-add{grid-template-columns:1fr 130px 130px}.task-add button{grid-column:auto}}
+:root{--bg:#f6f4ef;--card:#fff;--ink:#302f29;--muted:#89877d;--line:#e9e5dc;--green:#607b68;--green-soft:#e9eee7;--brown:#806b55;--shadow:0 5px 22px #3933260b}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;padding-bottom:calc(86px + env(safe-area-inset-bottom))}
+header{max-width:760px;margin:auto;padding:calc(18px + env(safe-area-inset-top)) 20px 10px;display:flex;align-items:center;justify-content:space-between}
+.brand{font-size:25px;font-weight:850;letter-spacing:-1px}.brand span{color:var(--green)}.sub{font-size:10px;letter-spacing:1.4px;color:var(--muted);margin-top:2px}
+main{max-width:760px;margin:auto;padding:10px 16px 26px}
+.hero{background:linear-gradient(135deg,#e8eee6,#f0ece3);border-radius:24px;padding:22px;margin:2px 0 18px}
+.eyebrow{font-size:11px;letter-spacing:1px;color:var(--green)}h1{font-size:23px;margin:8px 0 5px}.hero p{font-size:12px;color:#74776d;margin:0}
+.stats{display:flex;justify-content:space-between;align-items:end;margin-top:18px}.percent{font-size:31px;font-weight:850}.small{font-size:11px;color:var(--muted);line-height:1.7}.track{height:7px;border-radius:20px;background:#d9dfd5;overflow:hidden;margin-top:8px}.fill{height:100%;width:0;background:var(--green);transition:width .2s}
+.section{display:none}.section.active{display:block}.section-title{font-size:16px;font-weight:800;margin:8px 0 12px}.row{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:19px;padding:16px;margin-bottom:13px;box-shadow:var(--shadow)}
+button,.btn{border:0;border-radius:13px;padding:12px 15px;background:var(--green);color:white;font-size:13px;font-weight:700;cursor:pointer}
+button.secondary{background:var(--green-soft);color:var(--green)}button.ghost{background:transparent;color:var(--muted);padding:7px 9px;font-size:18px}
+button:disabled{opacity:.4;cursor:not-allowed}
+input,textarea,select{width:100%;min-width:0;border:1px solid var(--line);border-radius:12px;padding:12px;background:#fff;color:var(--ink);font:inherit;font-size:14px}
+textarea{min-height:105px;resize:vertical}.field{margin:10px 0}.field label{display:block;font-size:11px;color:var(--muted);margin:0 0 6px}
+.formrow{display:flex;gap:8px}.formrow>*{flex:1}
+.task{display:flex;align-items:center;gap:10px;padding:12px 0;border-bottom:1px solid #f0eee8}.task:last-child{border:0}
+.task input[type=checkbox],.habit input[type=checkbox]{width:19px;height:19px;accent-color:var(--green);flex:0 0 auto;padding:0}
+.task-main{flex:1;min-width:0}.task-time{font-size:11px;color:var(--muted)}.task-name{font-size:14px;margin-top:3px;overflow-wrap:anywhere}.done .task-name{text-decoration:line-through;color:#aaa99f}
+.tag{font-size:10px;padding:5px 8px;border-radius:20px;background:#f1f1eb;color:#697568;white-space:nowrap}
+.empty{text-align:center;padding:18px 8px;color:var(--muted);font-size:12px}
+.habit{display:flex;align-items:center;gap:10px;padding:12px 0;border-bottom:1px solid #f0eee8}.habit:last-child{border:0}.habit span{flex:1;font-size:14px}
+nav{position:fixed;z-index:5;bottom:0;left:0;right:0;display:flex;justify-content:center;gap:3px;background:#fffFf2;backdrop-filter:blur(14px);border-top:1px solid var(--line);padding:8px 5px calc(8px + env(safe-area-inset-bottom))}
+nav button{flex:1;max-width:150px;background:transparent;color:var(--muted);padding:7px 2px;font-size:10px;font-weight:600}
+nav button.active{background:var(--green-soft);color:var(--green)}
+nav .ico{display:block;font-size:18px;margin-bottom:3px}
+#toast{position:fixed;z-index:10;bottom:100px;left:50%;transform:translateX(-50%);background:#302f29;color:white;border-radius:30px;padding:10px 16px;font-size:12px;opacity:0;pointer-events:none;transition:.2s;max-width:90%;white-space:nowrap}
+#toast.show{opacity:1}.result{white-space:pre-wrap;line-height:1.8;font-size:13px;background:#f8f7f2;border-radius:13px;padding:13px;overflow-wrap:anywhere}
+.foot{text-align:center;color:#a09d92;font-size:10px;padding:15px}
+@media(min-width:600px){main{padding-left:24px;padding-right:24px}.hero{padding:27px}}
 </style>
 </head>
 <body>
-<header><div><div class="brand">Daily<span>+</span></div><div class="sub">MAKE EVERY DAY COUNT</div></div><button class="secondary" id="installBtn" hidden>追加</button></header>
+<header><div><div class="brand">Daily<span>+</span></div><div class="sub">MAKE EVERY DAY COUNT</div></div><button class="secondary" id="installBtn" hidden>ホーム画面に追加</button></header>
 <main>
-<section class="hero">
- <div class="eyebrow" id="todayLabel">YOUR DAY</div><h1 id="greeting">今日もいい1日にしよう。</h1><p>小さな積み重ねが、未来をつくる。</p>
- <div class="stats"><div><div class="percent" id="progress">0%</div><div class="small">今日の達成率</div></div><div style="text-align:right"><div style="font-size:20px;font-weight:800" id="count">0/0</div><div class="small">完了したタスク</div></div></div>
+<section class="hero" id="homeHero">
+ <div class="eyebrow" id="todayLabel">YOUR DAY</div><h1>今日も、自分のペースで。</h1><p>小さな積み重ねが、未来をつくる。</p>
+ <div class="stats"><div><div class="percent" id="progress">0%</div><div class="small">今日の達成率</div></div><div style="text-align:right"><strong id="count">0/0</strong><div class="small">完了したタスク</div></div></div>
  <div class="track"><div class="fill" id="progressBar"></div></div>
 </section>
-<div class="tabs" id="tabs">
- <button class="tab active" data-tab="today">今日</button><button class="tab" data-tab="calendar">カレンダー</button><button class="tab" data-tab="habits">習慣</button><button class="tab" data-tab="journal">振り返り</button><button class="tab" data-tab="settings">設定</button>
-</div>
-<section class="section active" id="today">
- <div class="row"><div class="section-title">今日のスケジュール</div><span class="small" id="remaining"></span></div>
- <div class="card" id="taskList"></div>
- <div class="card">
-  <div class="section-title">予定を追加</div>
-  <div class="task-add"><input id="taskName" placeholder="例：ESを書く"><input id="taskTime" type="time" value="18:00"><select id="taskCategory"><option>その他</option><option>勉強</option><option>就活</option><option>生活</option><option>予定</option><option>プライベート</option></select><button id="addTask">＋ 追加する</button></div>
- </div>
- <div class="card">
-  <div class="section-title">AIスケジュール作成</div>
-  <p class="small" style="line-height:1.7">やりたいこと・固定予定・所要時間を入力すると、無理のない予定案を作るためのプロンプトを用意するよ。登録済みの今日のタスク・習慣も依頼文に自動で含めます。ChatGPTが開いたら、コピーされた文章を入力欄に貼り付けて送信してね。</p>
-  <div class="field"><label>今日やりたいこと・所要時間</label><textarea id="aiTasks" placeholder="例：勉強1時間、面接練習30分、洗濯45分"></textarea></div>
-  <div class="field"><label>動かせない予定</label><textarea id="aiFixed" placeholder="例：11:30病院、17:00友達と飲み"></textarea></div>
+
+<section class="section active" id="home">
+ <div class="row"><div class="section-title">今日の予定</div><span class="small" id="remaining"></span></div>
+ <div class="card" id="homeTasks"></div>
+ <div class="card"><div class="section-title">AIスケジュール作成</div>
+  <p class="small">やりたいことや固定予定をもとに、今日の予定案を作成するよ。AIの提案は自動登録されず、内容を確認してから追加できる設計です。</p>
+  <div class="field"><label>やりたいこと・所要時間</label><textarea id="aiTasks" placeholder="例：勉強1時間、洗濯45分"></textarea></div>
+  <div class="field"><label>動かせない予定</label><textarea id="aiFixed" placeholder="例：11:30 病院"></textarea></div>
   <div class="formrow"><div class="field"><label>開始できる時間</label><input type="time" id="aiStart" value="09:00"></div><div class="field"><label>終了したい時間</label><input type="time" id="aiEnd" value="22:00"></div></div>
-  <button class="full" id="makeAI">✦ ChatGPTで予定案を作る</button>
- </div>
- <div class="card">
-  <div class="section-title">リマインダー</div><p class="small">予定時刻にこのページを開いている間、ブラウザ通知で知らせる設定です。</p>
-  <button class="secondary full" id="notifyBtn">通知を許可する</button><div class="small" id="notifyStatus" style="margin-top:8px"></div>
+  <button class="full" id="makeAI">✦ AIで予定案を作る</button>
+  <div id="aiStatus" class="small" style="margin-top:9px"></div><div id="aiResult" hidden class="result" style="margin-top:10px"></div>
  </div>
 </section>
-<section class="section" id="calendar">
+
+<section class="section" id="plans">
+ <div class="section-title">予定</div>
  <div class="card">
-  <div class="calendar-head"><button class="secondary" id="prevMonth">‹</button><strong id="monthTitle"></strong><button class="secondary" id="nextMonth">›</button></div>
-  <div class="calgrid" id="calendarGrid"></div>
+  <div class="field"><label>表示・編集する日付（今日から前後7日間）</label><input type="date" id="planDate"></div>
+  <div class="row"><strong id="planDateLabel"></strong><span class="small" id="planEditStatus"></span></div>
+  <div id="planTasks" style="margin-top:8px"></div>
  </div>
- <div class="card"><div class="section-title" id="selectedDateTitle">選択した日の予定</div><div id="selectedTasks"></div><p class="small">日付を選んで、その日のタスクを確認できます。</p></div>
+ <div class="card" id="planForm">
+  <div class="section-title">予定を追加</div>
+  <div class="field"><label>予定名</label><input id="taskName" placeholder="例：ESを書く"></div>
+  <div class="formrow"><div class="field"><label>時刻</label><input id="taskTime" type="time" value="18:00"></div><div class="field"><label>カテゴリー</label><select id="taskCategory"><option>その他</option><option>勉強</option><option>就活</option><option>生活</option><option>予定</option><option>プライベート</option></select></div></div>
+  <button id="addTask" class="full">＋ 予定を追加</button>
+ </div>
 </section>
+
 <section class="section" id="habits">
- <div class="section-title">毎日の習慣</div><div class="card"><div class="row"><strong>今日の習慣</strong><span class="small" id="habitCount"></span></div><div id="habitList"></div></div>
+ <div class="section-title">習慣</div>
+ <div class="card"><div class="row"><strong>今日の習慣</strong><span class="small" id="habitCount"></span></div><div id="habitList"></div></div>
  <div class="card"><div class="section-title">習慣を追加</div><div class="formrow"><input id="habitName" placeholder="例：10分読書"><button id="addHabit">追加</button></div></div>
 </section>
-<section class="section" id="journal">
- <div class="section-title">今日の振り返り</div><div class="card">
+
+<section class="section" id="diary">
+ <div class="section-title">日記</div>
+ <div class="card">
+  <div class="field"><label>日付（今日から前後7日間）</label><input type="date" id="diaryDate"></div>
   <div class="field"><label>今日できたこと・頑張ったこと</label><textarea id="journalGood" placeholder="小さなことでもOK"></textarea></div>
   <div class="field"><label>改善したいこと・気づき</label><textarea id="journalLearn" placeholder="明日に活かしたいこと"></textarea></div>
   <div class="field"><label>明日の自分へ</label><textarea id="journalTomorrow" placeholder="明日やること、ひとこと"></textarea></div>
-  <button class="full" id="saveJournal">保存する</button><p class="small">日記はこの端末のブラウザ内に保存されます。</p>
+  <button class="full" id="saveJournal">保存する</button>
  </div>
 </section>
-<section class="section" id="settings">
- <div class="section-title">設定</div><div class="card">
-  <strong>データについて</strong><p class="small" style="line-height:1.8">予定・習慣・日記は、この端末のブラウザ内に保存されます。ブラウザのデータを消去すると失われる場合があります。現時点では端末間同期・クラウドバックアップはありません。</p>
-  <button class="secondary full" id="exportData">データを書き出す（JSON）</button>
-  <div style="height:10px"></div><button class="secondary full" id="importBtn">データを読み込む</button><input id="importFile" type="file" accept="application/json" hidden>
- </div>
- <div class="card"><strong>Daily+について</strong><p class="small" style="line-height:1.8">無料で使える個人用Webアプリの第1版です。AIスケジュールはChatGPTを開いて相談する方式です。自動通知はページを開いている間のみ動作します。</p></div>
+
+<section class="section" id="other">
+ <div class="section-title">その他</div>
+ <div class="card"><strong>通知</strong><p class="small">現在の通知は、アプリを開いている間に予定時刻を知らせる方式です。アプリを閉じていても届くプッシュ通知は、サーバー側の追加設定後に対応します。</p>
+ <button class="secondary full" id="notifyBtn">ブラウザ通知を許可する</button><div class="small" id="notifyStatus" style="margin-top:8px"></div></div>
+ <div class="card"><strong>データのバックアップ</strong><p class="small">予定・習慣・日記をJSONファイルとして保存できます。機種変更やブラウザのデータ消去に備えて、定期的に書き出してください。</p>
+ <button class="secondary full" id="exportData">データを書き出す（JSON）</button><div style="height:9px"></div><button class="secondary full" id="importBtn">バックアップを読み込む</button><input id="importFile" type="file" accept="application/json" hidden></div>
+ <div class="card"><strong>Daily+ 2.0</strong><p class="small">毎日の予定・習慣・日記をまとめる個人用アプリです。データは現在この端末のブラウザ内に保存されます。端末間同期はありません。</p></div>
 </section>
 <div class="foot">Daily+ · Your personal daily planner</div>
 </main>
 <nav>
- <button class="active" data-tab="today"><span class="ico">☀</span>今日</button><button data-tab="calendar"><span class="ico">▦</span>予定</button><button data-tab="habits"><span class="ico">↗</span>習慣</button><button data-tab="journal"><span class="ico">✎</span>日記</button><button data-tab="settings"><span class="ico">⚙</span>設定</button>
+ <button class="active" data-tab="home"><span class="ico">⌂</span>ホーム</button>
+ <button data-tab="plans"><span class="ico">▦</span>予定</button>
+ <button data-tab="habits"><span class="ico">↗</span>習慣</button>
+ <button data-tab="diary"><span class="ico">✎</span>日記</button>
+ <button data-tab="other"><span class="ico">•••</span>その他</button>
 </nav>
 <div id="toast"></div>
 <script>
+'use strict';
 const $=id=>document.getElementById(id);
 const key='dailyplus-v1';
-const today=()=>{const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`};
-const dateLabel=(s)=>{const d=new Date(s+'T00:00:00');return `${d.getMonth()+1}月${d.getDate()}日（${'日月火水木金土'[d.getDay()]}）`};
+const pad=n=>String(n).padStart(2,'0');
+const dateString=d=>`${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
+const today=()=>dateString(new Date());
+const shiftDate=(s,days)=>{const d=new Date(s+'T12:00:00');d.setDate(d.getDate()+days);return dateString(d)};
+const dateLabel=s=>{const d=new Date(s+'T12:00:00');return `${d.getFullYear()}年${d.getMonth()+1}月${d.getDate()}日（${'日月火水木金土'[d.getDay()]}）`};
+const withinRange=s=>s>=shiftDate(today(),-7)&&s<=shiftDate(today(),7);
+const uid=()=>crypto.randomUUID?crypto.randomUUID():String(Date.now())+Math.random().toString(16).slice(2);
 let state=load();
-function load(){try{return JSON.parse(localStorage.getItem(key))||{tasks:{},habits:[],journal:{}}}catch{return {tasks:{},habits:[],journal:{}}}}
-function save(){localStorage.setItem(key,JSON.stringify(state))}
-function tasksFor(date=today()){return state.tasks[date]||[]}
-function toast(s){$('toast').textContent=s;$('toast').classList.add('show');setTimeout(()=>$('toast').classList.remove('show'),2200)}
-function render(){
- const date=today(),ts=tasksFor(date),complete=ts.filter(t=>t.done).length,p=ts.length?Math.round(complete/ts.length*100):0;
- $('todayLabel').textContent=new Intl.DateTimeFormat('ja-JP',{dateStyle:'full'}).format(new Date());
- $('progress').textContent=p+'%';$('count').textContent=`${complete}/${ts.length}`;$('progressBar').style.width=p+'%';$('remaining').textContent=`残り ${ts.length-complete} 件`;
- $('taskList').innerHTML=ts.length?ts.slice().sort((a,b)=>a.time.localeCompare(b.time)).map(t=>`<div class="task ${t.done?'done':''}"><input type="checkbox" data-id="${t.id}" ${t.done?'checked':''}><div class="task-main"><div class="task-time">${t.time}</div><div class="task-name">${esc(t.name)}</div></div><span class="tag">${esc(t.category||'その他')}</span><button class="ghost" data-delete="${t.id}" aria-label="削除">×</button></div>`).join(''):'<div class="empty">予定はまだないよ。最初の予定を追加しよう。</div>';
- $('taskList').querySelectorAll('[data-id]').forEach(el=>el.onchange=()=>{const t=ts.find(x=>x.id===el.dataset.id);if(t){t.done=el.checked;save();render()}});
- $('taskList').querySelectorAll('[data-delete]').forEach(el=>el.onclick=()=>{state.tasks[date]=ts.filter(x=>x.id!==el.dataset.delete);save();render()});
- renderHabits();renderCalendar();loadJournal();
-}
-function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-$('addTask').onclick=()=>{let name=$('taskName').value.trim();if(!name)return toast('予定名を入力してね');let date=today();state.tasks[date]=tasksFor(date).concat([{id:crypto.randomUUID(),name,time:$('taskTime').value||'12:00',category:$('taskCategory').value,done:false}]);$('taskName').value='';save();render();toast('予定を追加したよ')};
-function renderHabits(){const hs=state.habits;const day=today();$('habitCount').textContent=`${hs.filter(h=>(h.done||{})[day]).length}/${hs.length} 完了`;$('habitList').innerHTML=hs.length?hs.map(h=>`<div class="habit"><input type="checkbox" data-habit="${h.id}" ${(h.done||{})[day]?'checked':''}><label>${esc(h.name)}</label><button class="ghost" data-hdelete="${h.id}">×</button></div>`).join(''):'<div class="empty">続けたい習慣を追加しよう。</div>';
- $('habitList').querySelectorAll('[data-habit]').forEach(el=>el.onchange=()=>{let h=hs.find(x=>x.id===el.dataset.habit);h.done=h.done||{};h.done[day]=el.checked;save();renderHabits()});
- $('habitList').querySelectorAll('[data-hdelete]').forEach(el=>el.onclick=()=>{state.habits=hs.filter(x=>x.id!==el.dataset.hdelete);save();renderHabits()})}
-$('addHabit').onclick=()=>{let n=$('habitName').value.trim();if(!n)return;state.habits.push({id:crypto.randomUUID(),name:n,done:{}});$('habitName').value='';save();renderHabits()};
-let calDate=new Date(),selected=today();
-function renderCalendar(){const y=calDate.getFullYear(),m=calDate.getMonth();$('monthTitle').textContent=`${y}年 ${m+1}月`;const first=new Date(y,m,1).getDay(),last=new Date(y,m+1,0).getDate();let html=['日','月','火','水','木','金','土'].map(x=>`<div class="calname">${x}</div>`).join('');for(let i=0;i<first;i++)html+='<div></div>';for(let d=1;d<=last;d++){let s=`${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;html+=`<button class="calday ${s===selected?'selected':''} ${s===today()?'today':''}" data-date="${s}">${d}</button>`}$('calendarGrid').innerHTML=html;$('calendarGrid').querySelectorAll('[data-date]').forEach(b=>b.onclick=()=>{selected=b.dataset.date;renderCalendar()});$('selectedDateTitle').textContent=dateLabel(selected)+' の予定';const list=state.tasks[selected]||[];$('selectedTasks').innerHTML=list.length?list.slice().sort((a,b)=>a.time.localeCompare(b.time)).map(t=>`<div class="task"><span class="task-time">${t.time}</span><div class="task-main">${esc(t.name)}</div><span class="tag">${t.done?'完了':esc(t.category||'予定')}</span></div>`).join(''):'<div class="empty">この日の予定はありません。</div>'}
-$('prevMonth').onclick=()=>{calDate.setMonth(calDate.getMonth()-1);renderCalendar()};$('nextMonth').onclick=()=>{calDate.setMonth(calDate.getMonth()+1);renderCalendar()};
-function loadJournal(){const j=state.journal[today()]||{};$('journalGood').value=j.good||'';$('journalLearn').value=j.learn||'';$('journalTomorrow').value=j.tomorrow||''}
-$('saveJournal').onclick=()=>{state.journal[today()]={good:$('journalGood').value,learn:$('journalLearn').value,tomorrow:$('journalTomorrow').value};save();toast('日記を保存したよ')};
-document.querySelectorAll('[data-tab]').forEach(b=>b.onclick=()=>switchTab(b.dataset.tab));
-function switchTab(tab){document.querySelectorAll('.section').forEach(s=>s.classList.toggle('active',s.id===tab));document.querySelectorAll('[data-tab]').forEach(b=>b.classList.toggle('active',b.dataset.tab===tab));window.scrollTo({top:0,behavior:'smooth'})}
-function buildAIPrompt(){
- const date=today();
- const registered=tasksFor(date);
- const openTasks=registered.filter(t=>!t.done);
- const doneTasks=registered.filter(t=>t.done);
- const taskLine=t=>`- ${t.time||'時刻未設定'}｜${t.name}（${t.category||'その他'}）`;
- const habits=state.habits||[];
- const habitLines=habits.map(h=>`- ${h.name}（今日${(h.done||{})[date]?'完了':'未完了'}）`);
- return `あなたは生活設計が得意なスケジュールアシスタントです。以下の情報をもとに、休憩・移動・準備・食事の時間も考慮した、無理のない1日の予定を作成してください。不足情報があれば、予定を作る前に必要なことだけ質問してください。
-
-【日付】
-${date}
-
-【使える時間】
-開始可能：${$('aiStart').value}
-終了希望：${$('aiEnd').value}
-
-【アプリに登録済みの今日のタスク・予定（未完了）】
-${openTasks.length?openTasks.map(taskLine).join('\\n'):'（未登録）'}
-
-【アプリで完了済みのタスク】
-${doneTasks.length?doneTasks.map(taskLine).join('\\n'):'（なし）'}
-※完了済みのものは再度予定に入れないでください。
-
-【今日の習慣】
-${habitLines.length?habitLines.join('\\n'):'（登録なし）'}
-
-【追加でやりたいこと・所要時間】
-${$('aiTasks').value.trim()||'（追加なし）'}
-
-【動かせない予定】
-${$('aiFixed').value.trim()||'（追加なし）'}
-
-【作成ルール】
-- 登録済みタスクの時刻は、指定がある場合は基本的に尊重してください。
-- 同じ内容のタスクが重複していたら統合してください。
-- 優先順位を考え、詰め込みすぎず余白を確保してください。
-- 時刻順の表と、最後にチェックリストを作ってください。
-- 予定が時間内に収まらない場合は、無理に詰め込まず翌日以降に回す候補を示してください。`;
-}
-
-$('makeAI').onclick=async()=>{
- const prompt=buildAIPrompt();
- let copied=false;
+function load(){
  try{
-  if(navigator.clipboard && window.isSecureContext){
-   await navigator.clipboard.writeText(prompt);
-   copied=true;
-  }
- }catch(e){}
- if(!copied){
-  const area=document.createElement('textarea');
-  area.value=prompt;
-  area.setAttribute('readonly','');
-  area.style.position='fixed';
-  area.style.opacity='0';
-  document.body.appendChild(area);
-  area.select();
-  try{copied=document.execCommand('copy')}catch(e){}
-  area.remove();
- }
- if(copied){
-  toast('依頼文をコピーしたよ。ChatGPTで貼り付けてね');
- }else{
-  const area=document.createElement('textarea');
-  area.value=prompt;
-  area.style.position='fixed';
-  area.style.left='12px';
-  area.style.bottom='90px';
-  area.style.width='calc(100% - 24px)';
-  area.style.height='180px';
-  area.style.zIndex='20';
-  area.style.background='#fff';
-  area.style.border='2px solid #557b65';
-  area.id='aiPromptFallback';
-  document.body.appendChild(area);
-  area.focus();
-  area.select();
-  toast('コピーできない場合は表示文を長押ししてコピーしてね');
- }
- window.open('https://chatgpt.com/','_blank');
+  const raw=JSON.parse(localStorage.getItem(key)||'null');
+  if(!raw||typeof raw!=='object')return {tasks:{},habits:[],journal:{}};
+  return {tasks:raw.tasks&&typeof raw.tasks==='object'?raw.tasks:{},habits:Array.isArray(raw.habits)?raw.habits:[],journal:raw.journal&&typeof raw.journal==='object'?raw.journal:{}};
+ }catch{return {tasks:{},habits:[],journal:{}}}
+}
+function save(){localStorage.setItem(key,JSON.stringify(state))}
+function tasksFor(date=today()){return Array.isArray(state.tasks[date])?state.tasks[date]:[]}
+function toast(s){$('toast').textContent=s;$('toast').classList.add('show');setTimeout(()=>$('toast').classList.remove('show'),2200)}
+function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function sortedTasks(date){return tasksFor(date).slice().sort((a,b)=>(a.time||'').localeCompare(b.time||''))}
+function taskMarkup(t,date,showCheck=true){
+ return `<div class="task ${t.done?'done':''}">${showCheck?`<input type="checkbox" data-toggle="${esc(t.id)}" ${t.done?'checked':''} aria-label="完了">`:''}<div class="task-main"><div class="task-time">${esc(t.time||'時刻未設定')}</div><div class="task-name">${esc(t.name)}</div></div><span class="tag">${esc(t.category||'その他')}</span><button class="ghost" data-delete="${esc(t.id)}" aria-label="削除">×</button></div>`;
+}
+function bindTaskActions(container,date){
+ container.querySelectorAll('[data-toggle]').forEach(el=>el.onchange=()=>{const t=tasksFor(date).find(x=>x.id===el.dataset.toggle);if(t){t.done=el.checked;save();render()}});
+ container.querySelectorAll('[data-delete]').forEach(el=>el.onclick=()=>{state.tasks[date]=tasksFor(date).filter(x=>x.id!==el.dataset.delete);save();render();toast('予定を削除したよ')});
+}
+function renderHome(){
+ const ts=tasksFor(),done=ts.filter(t=>t.done).length,p=ts.length?Math.round(done/ts.length*100):0;
+ $('todayLabel').textContent=new Intl.DateTimeFormat('ja-JP',{dateStyle:'full'}).format(new Date());
+ $('progress').textContent=p+'%';$('count').textContent=`${done}/${ts.length}`;$('progressBar').style.width=p+'%';$('remaining').textContent=`残り ${ts.length-done} 件`;
+ $('homeTasks').innerHTML=ts.length?sortedTasks(today()).map(t=>taskMarkup(t,today())).join(''):'<div class="empty">今日の予定はまだないよ。「予定」から追加しよう。</div>';
+ bindTaskActions($('homeTasks'),today());
+}
+let planSelected=today();
+function renderPlans(){
+ const editable=withinRange(planSelected);
+ $('planDate').value=planSelected;$('planDateLabel').textContent=dateLabel(planSelected);
+ $('planEditStatus').textContent=editable?'編集できます':'閲覧のみ（編集範囲外）';
+ $('planForm').hidden=!editable;
+ const ts=sortedTasks(planSelected);
+ $('planTasks').innerHTML=ts.length?ts.map(t=>taskMarkup(t,planSelected)).join(''):'<div class="empty">この日の予定はありません。</div>';
+ bindTaskActions($('planTasks'),planSelected);
+}
+function renderHabits(){
+ const hs=state.habits,day=today(),done=hs.filter(h=>(h.done||{})[day]).length;
+ $('habitCount').textContent=`${done}/${hs.length} 完了`;
+ $('habitList').innerHTML=hs.length?hs.map(h=>`<div class="habit"><input type="checkbox" data-habit="${esc(h.id)}" ${(h.done||{})[day]?'checked':''}><span>${esc(h.name)}</span><button class="ghost" data-hdelete="${esc(h.id)}" aria-label="削除">×</button></div>`).join(''):'<div class="empty">続けたい習慣を追加しよう。</div>';
+ $('habitList').querySelectorAll('[data-habit]').forEach(el=>el.onchange=()=>{const h=hs.find(x=>x.id===el.dataset.habit);if(h){h.done=h.done||{};h.done[day]=el.checked;save();renderHabits()}});
+ $('habitList').querySelectorAll('[data-hdelete]').forEach(el=>el.onclick=()=>{state.habits=state.habits.filter(x=>x.id!==el.dataset.hdelete);save();renderHabits();toast('習慣を削除したよ')});
+}
+let diarySelected=today();
+function loadDiary(){
+ const j=state.journal[diarySelected]||{};
+ $('diaryDate').value=diarySelected;$('journalGood').value=j.good||'';$('journalLearn').value=j.learn||'';$('journalTomorrow').value=j.tomorrow||'';
+}
+function render(){renderHome();renderPlans();renderHabits();loadDiary()}
+function switchTab(tab){
+ document.querySelectorAll('.section').forEach(s=>s.classList.toggle('active',s.id===tab));
+ document.querySelectorAll('[data-tab]').forEach(b=>b.classList.toggle('active',b.dataset.tab===tab));
+ $('homeHero').hidden=tab!=='home';window.scrollTo({top:0,behavior:'smooth'});
+}
+document.querySelectorAll('[data-tab]').forEach(b=>b.onclick=()=>switchTab(b.dataset.tab));
+$('planDate').min=shiftDate(today(),-7);$('planDate').max=shiftDate(today(),7);
+$('diaryDate').min=shiftDate(today(),-7);$('diaryDate').max=shiftDate(today(),7);
+$('planDate').value=planSelected;
+$('planDate').onchange=()=>{planSelected=$('planDate').value||today();renderPlans()};
+$('diaryDate').value=diarySelected;
+$('diaryDate').onchange=()=>{diarySelected=$('diaryDate').value||today();loadDiary()};
+$('addTask').onclick=()=>{
+ if(!withinRange(planSelected))return toast('編集できる期間は今日から前後7日間です');
+ const name=$('taskName').value.trim();if(!name)return toast('予定名を入力してね');
+ state.tasks[planSelected]=tasksFor(planSelected).concat([{id:uid(),name,time:$('taskTime').value||'12:00',category:$('taskCategory').value,done:false}]);
+ $('taskName').value='';save();render();toast('予定を追加したよ');
 };
-$('notifyBtn').onclick=async()=>{if(!('Notification'in window))return toast('このブラウザは通知に対応していません');let p=await Notification.requestPermission();$('notifyStatus').textContent=p==='granted'?'通知が許可されました。このページを開いている間、予定時刻に通知します。':'通知は許可されていません。';toast(p==='granted'?'通知を許可しました':'通知は未許可です')};
-if('Notification'in window){$('notifyStatus').textContent=Notification.permission==='granted'?'通知は許可されています。':'通知はまだ許可されていません。'}
-let alerted=new Set();setInterval(()=>{if(!('Notification'in window)||Notification.permission!=='granted'||document.hidden)return;const now=new Date(),hm=`${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;tasksFor().forEach(t=>{let k=today()+t.id;if(t.time===hm&&!t.done&&!alerted.has(k)){new Notification('Daily+｜予定の時間だよ',{body:t.name});alerted.add(k)}})},20000);
-$('exportData').onclick=()=>{const blob=new Blob([JSON.stringify(state,null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='daily-plus-backup.json';a.click();URL.revokeObjectURL(a.href)};
-$('importBtn').onclick=()=>$('importFile').click();$('importFile').onchange=async e=>{try{const data=JSON.parse(await e.target.files[0].text());if(!data.tasks||!data.habits||!data.journal)throw Error();state=data;save();render();toast('データを読み込んだよ')}catch{toast('ファイルを読み込めませんでした')}};
-let deferred;window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferred=e;$('installBtn').hidden=false});$('installBtn').onclick=async()=>{if(deferred){deferred.prompt();deferred=null}else toast('Safariの共有メニューから「ホーム画面に追加」を選んでね')};
-if('serviceWorker'in navigator&&location.protocol.startsWith('http'))navigator.serviceWorker.register('./sw.js').catch(()=>{});
+$('addHabit').onclick=()=>{const name=$('habitName').value.trim();if(!name)return toast('習慣名を入力してね');state.habits.push({id:uid(),name,done:{}});$('habitName').value='';save();renderHabits();toast('習慣を追加したよ')};
+$('saveJournal').onclick=()=>{
+ if(!withinRange(diarySelected))return toast('編集できる期間は今日から前後7日間です');
+ state.journal[diarySelected]={good:$('journalGood').value,learn:$('journalLearn').value,tomorrow:$('journalTomorrow').value};
+ save();toast('日記を保存したよ');
+};
+function buildAIPrompt(){
+ const date=today(),open=tasksFor(date).filter(t=>!t.done),done=tasksFor(date).filter(t=>t.done);
+ const fmt=t=>`- ${t.time||'時刻未設定'}｜${t.name}（${t.category||'その他'}）`;
+ const habits=state.habits.map(h=>`- ${h.name}（今日${(h.done||{})[date]?'完了':'未完了'}）`);
+ return `あなたは生活設計が得意なスケジュールアシスタントです。休憩・移動・準備・食事の時間を考慮し、無理のない1日の予定案を日本語で作成してください。\n【日付】${date}\n【開始可能】${$('aiStart').value}\n【終了希望】${$('aiEnd').value}\n【登録済み未完了タスク】\n${open.length?open.map(fmt).join('\n'):'なし'}\n【完了済みタスク（再登録しない）】\n${done.length?done.map(fmt).join('\n'):'なし'}\n【習慣】\n${habits.join('\n')||'なし'}\n【追加したいこと・所要時間】\n${$('aiTasks').value.trim()||'なし'}\n【動かせない予定】\n${$('aiFixed').value.trim()||'なし'}\n【ルール】既存予定と重複させない。余白を確保する。時間順の表とチェックリストを作る。収まらないタスクは翌日以降の候補として示す。提案をアプリへ自動登録しない。`;
+}
+$('makeAI').onclick=async()=>{
+ const btn=$('makeAI');btn.disabled=true;$('aiStatus').textContent='AIに予定案を依頼中…';$('aiResult').hidden=true;
+ try{
+  const res=await fetch('https://dailyplus-ai.g2ykghz8ib.workers.dev',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({prompt:buildAIPrompt()})});
+  if(!res.ok)throw new Error('HTTP '+res.status);
+  const data=await res.json();const answer=data.schedule||data.response||data.result||data.text;
+  if(!answer)throw new Error('AIの返答形式を確認できません');
+  $('aiResult').textContent=typeof answer==='string'?answer:JSON.stringify(answer,null,2);$('aiResult').hidden=false;$('aiStatus').textContent='予定案ができたよ。内容を確認してから「予定」に手動で追加してね。';
+ }catch(e){$('aiStatus').textContent='AIに接続できませんでした。Workerの設定・応答形式を確認する必要があります。';console.error(e)}
+ finally{btn.disabled=false}
+};
+$('notifyBtn').onclick=async()=>{
+ if(!('Notification'in window))return toast('このブラウザは通知に対応していません');
+ const permission=await Notification.requestPermission();
+ $('notifyStatus').textContent=permission==='granted'?'通知は許可されています。ページを開いている間に予定時刻を確認します。':'通知は許可されていません。';
+ toast(permission==='granted'?'通知を許可したよ':'通知は未許可です');
+};
+if('Notification'in window)$('notifyStatus').textContent=Notification.permission==='granted'?'通知は許可されています。':'通知はまだ許可されていません。';
+let alerted=new Set();
+setInterval(()=>{
+ if(!('Notification'in window)||Notification.permission!=='granted'||document.hidden)return;
+ const now=new Date(),hm=pad(now.getHours())+':'+pad(now.getMinutes()),date=today();
+ tasksFor(date).forEach(t=>{const id=date+t.id;if(t.time===hm&&!t.done&&!alerted.has(id)){new Notification('Daily+｜予定の時間だよ',{body:t.name});alerted.add(id)}});
+},20000);
+$('exportData').onclick=()=>{
+ const blob=new Blob([JSON.stringify(state,null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');
+ a.href=url;a.download='daily-plus-backup.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
+};
+$('importBtn').onclick=()=>$('importFile').click();
+$('importFile').onchange=async e=>{
+ const file=e.target.files&&e.target.files[0];if(!file)return;
+ try{
+  const data=JSON.parse(await file.text());
+  if(!data||typeof data!=='object'||!data.tasks||typeof data.tasks!=='object'||!Array.isArray(data.habits)||!data.journal||typeof data.journal!=='object')throw new Error('invalid');
+  if(!confirm('現在のデータを読み込んだ内容で置き換えます。先にバックアップを保存しましたか？'))return;
+  state={tasks:data.tasks,habits:data.habits,journal:data.journal};save();render();toast('バックアップを読み込んだよ');
+ }catch(err){toast('JSONを読み込めませんでした。ファイル形式を確認してね')}
+ finally{$('importFile').value=''}
+};
+let deferred;
+window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferred=e;$('installBtn').hidden=false});
+$('installBtn').onclick=async()=>{if(deferred){deferred.prompt();deferred=null}else toast('Safariの共有メニューから「ホーム画面に追加」を選んでね')};
+if('serviceWorker'in navigator&&location.protocol.startsWith('http'))navigator.serviceWorker.register('./sw.js').catch(err=>console.warn('Service Worker:',err));
 render();
 </script>
-</body></html>
+</body>
+</html>
